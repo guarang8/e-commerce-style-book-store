@@ -1,0 +1,5 @@
+<tr>
+	<td><%= link_to author.name, author_path(author) %></td>
+	<td><%= link_to 'Edit', edit_author_path(author) %></td>
+	<td><%= button_to 'Delete', author_path(author), :method => :delete, :data => { :confirm => "Are you sure you want to delete author #{author.name}?" }%></td>
+</tr>

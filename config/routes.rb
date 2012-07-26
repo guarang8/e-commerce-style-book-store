@@ -1,19 +1,9 @@
 BookStore::Application.routes.draw do
-  get "authors/new"
 
-  get "authors/create"
-
-  get "authors/edit"
-
-  get "authors/update"
-
-  get "authors/destroy"
-
-  get "authors/show"
-
-  get "authors/index"
-
-  get "about/index"
+  scope :module => "admin" do
+    resources :authors
+  end
+  get 'about/index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
