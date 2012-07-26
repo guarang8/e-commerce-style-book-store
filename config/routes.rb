@@ -1,5 +1,9 @@
 BookStore::Application.routes.draw do
 
+  scope :module => "admin" do 
+    resources :publishers 
+  end
+
   scope :module => "admin" do
     resources :authors
   end
