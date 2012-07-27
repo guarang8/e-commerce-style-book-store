@@ -1,5 +1,5 @@
 class Book < ActiveRecord::Base
-  attr_accessible :blurb, :isbn, :page_count, :price, :published_at, :publisher_id, :title
+  attr_accessible :blurb, :isbn, :page_count, :price, :published_at, :publisher_id, :title, :author_ids, :cover_image
   has_and_belongs_to_many :authors
   belongs_to :publisher
   validates_length_of :title, :in => 1..255
@@ -10,4 +10,6 @@ class Book < ActiveRecord::Base
   validates_numericality_of :price
   validates_format_of :isbn, :with => /[0-9\-xX]{13}/
   validates_uniqueness_of :isbn
+  mount_uploader :cover_image, ImageUploader # ImageUploader is 
+                                             #the class name for cover image
 end

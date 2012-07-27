@@ -1,20 +1,21 @@
-class BooksController < ApplicationController
+class Admin::BooksController < ApplicationController
   # GET /admin/books
   # GET /admin/books.json
   def index
-    @books = Book.all
+    list
+  end
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @books }
-    end
+  def list
+    @page_title = 'Listing books'
+    sort_by = params[:sort_by]
+    @books = Book.all(:order => sort_by)
   end
 
   # GET /admin/books/1
   # GET /admin/books/1.json
   def show
     @book = Book.find(params[:id])
-
+    @page_title = "#{@book.title}"
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @book }
@@ -24,6 +25,7 @@ class BooksController < ApplicationController
   # GET /admin/books/new
   # GET /admin/books/new.json
   def new
+    load_data
     @book = Book.new
 
     respond_to do |format|
@@ -34,6 +36,8 @@ class BooksController < ApplicationController
 
   # GET /admin/books/1/edit
   def edit
+    @page_title = 'Editing book'
+    load_data
     @book = Book.find(params[:id])
   end
 
@@ -42,14 +46,12 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(params[:book])
 
-    respond_to do |format|
-      if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
-        format.json { render json: @book, status: :created, location: @book }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
-      end
+    if @book.save
+      flash[:notice] = 'Book was successfully created.'
+      redirect_to books_path
+    else
+      load_data
+      render 'new'
     end
   end
 
@@ -79,5 +81,10 @@ class BooksController < ApplicationController
       format.html { redirect_to books_url }
       format.json { head :no_content }
     end
+  end
+  private
+  def load_data
+    @authors = Author.find(:all)
+    @publishers = Publisher.find(:all)
   end
 end

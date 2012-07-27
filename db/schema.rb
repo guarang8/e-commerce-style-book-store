@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120727062358) do
+ActiveRecord::Schema.define(:version => 20120727165226) do
 
   create_table "authors", :force => true do |t|
     t.string   "first_name"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20120727062358) do
     t.float    "price"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+    t.string   "cover_image"
   end
 
   add_index "books", ["publisher_id"], :name => "fk_books_publishers"

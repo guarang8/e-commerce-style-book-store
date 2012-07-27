@@ -1,7 +1,7 @@
 <%= form_for(@book) do |f| %>
   <% if @book.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this admin_book from being saved:</h2>
+      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
 
       <ul>
       <% @book.errors.full_messages.each do |msg| %>
@@ -10,6 +10,43 @@
       </ul>
     </div>
   <% end %>
+
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :publisher %>
+    <%= f.collection_select :publisher_id, Publisher.all, :id, :name, :prompt => true %>
+  </p>
+  <p>
+    <%= f.label :authors %>
+    <%= select_tag 'book[author_ids][]', options_from_collection_for_select( @authors, :id, :name, @book.authors.collect{ |author| author.id }), { :multiple => true, :size => 5 } %>
+  </p>
+  <p>
+    <%= f.label :published_at %>
+    <%= f.datetime_select :published_at %>
+  </p>
+  <p>
+    <%= f.label :isbn %>
+    <%= f.text_field :isbn %>
+  </p>
+  <p>
+    <%= f.label :blurb %>
+    <%= f.text_area :blurb %>
+  </p>
+  <p>
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+  </p>
+  <p>
+    <%= f.label :page_count %>
+    <%= f.text_field :page_count %>
+  </p>
+  <p>
+    <%= f.label :cover_image %>
+    <%= f.file_field :cover_image %>
+  </p>
 
   <div class="actions">
     <%= f.submit %>

@@ -1,6 +1,10 @@
 <h1>Editing book</h1>
 
-<%= render 'form' %>
+<%= form_tag "/books/#{@book.id}", :multipart => true do %>
+	<%= render 'form' %>
+	<%= submit_tag 'Edit' %>
+<% end %>
+
 
 <%= link_to 'Show', @book %> |
 <%= link_to 'Back', books_path %>
