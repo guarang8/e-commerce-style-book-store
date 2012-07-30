@@ -12,4 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require_tree .
+
+$(function(){
+	$(".draggable").draggable({
+		revert: true,
+		proxy: 'clone',
+		onStartDrag: function(){
+			$(this).draggable('options').cursor = 'not-allowed';
+			$(this).draggable('proxy').css('z-index',10);
+		},
+		onStopDrag: function(){
+			$(this).draggable('options').cursor='move';
+		}
+	});
+});
+

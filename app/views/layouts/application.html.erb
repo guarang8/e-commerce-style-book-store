@@ -5,6 +5,8 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <%= auto_discovery_link_tag :atom, "/feed" %>
+  <%= auto_discovery_link_tag :rss, "feed.rss" %>
 </head>
 <body>
 	<div id="header">
@@ -15,18 +17,23 @@
 	  <ul>
 	    <li><a href="/authors">Authors</a>&nbsp;|&nbsp;</li>
 	    <li><a href="/publishers">Publishers</a>&nbsp;|&nbsp;</li>
-	    <li><a href="#">Books</a>&nbsp;|&nbsp;</li>
+	    <li><a href="/books">Books</a>&nbsp;|&nbsp;</li>
 	    <li><a href="/">Catalog</a>&nbsp;|&nbsp;</li>
 	    <li><a href="/about/index">About</a>&nbsp;</li>
 	  </ul>
 	</div>
-	<div id="content">
+	<div class="clearfix" id="content">
 		<h1><%= "#{@page_title}" if @page_title %></h1>
 		<% if flash[:notice] %>
 			<div id="notice"><%= flash[:notice] %></div>
 		<% end %>
 		<%= yield %>
 	</div>
+	<% if @cart %>
+		<div class="droppable" id="shopping_cart">
+			<%= render :partial => 'carts/cart' %>
+		</div>
+	<% end %>
 	<div id="footer">
 		&copy; 2000-2012 Book Store
 	</div>

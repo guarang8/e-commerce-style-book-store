@@ -1,0 +1,20 @@
+<ul id="books">
+	<% @books.each do |book| %>
+		<li class="draggable book" id="book_<%=book.id%>">
+			<dl>
+				<dt><%= link_to book.title, book_path(book) %></dt>
+				<% book.authors.each do |author| %>
+					<dd><%= author.last_name %>, <%= author.first_name %></dd>
+				<% end %>
+				<dd>
+					<strong>
+						<%= add_book_link "+", book %>
+					</strong>
+				</dd>
+				<dd><%= pluralize(book.page_count, "page" ) %></dd>
+				<dd>Price: Rs.<%= sprintf("%0.2f",book.price) %></dd>
+				<dd><small>Publisher: <%= book.publisher.name %></small></dd>
+			</dl>
+		</li>
+	<% end %>
+</ul>

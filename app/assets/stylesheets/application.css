@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require about
+ *= require jquery.ui.all
  */
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -174,3 +175,29 @@ body {
   background-color: #fff; color: #333;
   margin-right: 230px;
 }
+
+#books{
+  list-style: none;
+  padding: 0;
+  float: left;
+}
+
+#books .book{
+  float: left;
+  border: 4px solid #ccc;
+  background-color: #fff;
+  margin: 10px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.clearfix:after{
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+.clearfix{ display: inline-block; }

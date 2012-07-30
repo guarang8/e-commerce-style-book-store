@@ -1,0 +1,16 @@
+//$('#shopping_cart').html("<%= escape_javascript(render :partial => "cart") %>");
+$('.droppable').droppable({
+	tolerance: 'touch'
+	onDragEnter: function(e,source){
+		$(source).draggable('options').cursor='auto';
+	},
+	onDragLeave: function(e,source){
+		$(source).draggable('options').cursor='not-allowed';
+	},
+	onDrop: function(e, source){
+		$.ajax({
+			type: "POST",
+			url: "/carts/add/<%=params[:id]%>"
+		});
+	}
+})

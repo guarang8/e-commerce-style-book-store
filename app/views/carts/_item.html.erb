@@ -1,0 +1,4 @@
+<%= link_to item.book.title, catalog_path(item.book.id) %>
+<%= pluralize(item.amount, "pc", "pcs") %>,
+Rs.<%= sprintf("%0.2f",item.price*item.amount) %>
+(<%= remove_book_link("-", item.book) %>)

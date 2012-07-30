@@ -1,0 +1,20 @@
+<% if flash[:cart_notice] %>
+	<% render :partial => 'carts/cart_notice' %>
+<% end %>
+<h3>Your Shopping Cart</h3>
+<ul>
+	<% @cart.cart_items.each do |item| %>
+		<li id="cart_item_<%= item.book.id %>">
+			<%= render :partial => 'carts/item', :object => item %>
+		</li>
+	<% end %>
+</ul>
+
+<p id="cart_total"><strong>Total: Rs.<%= sprintf("%0.2f",@cart.total) %></strong></p>
+<% unless @cart.cart_items.empty? %>
+	<p id="clear_cart_link">
+		<small>
+			<%= clear_cart_link %>
+		</small>
+	</p>
+<% end %>

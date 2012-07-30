@@ -1,0 +1,27 @@
+<%= form_tag catalogs_path, method: :get do %>
+	<p>
+		<%= text_field_tag :query, params[:query] %>
+		<%= submit_tag "Search", name: nil %>
+	</p>
+<% end %>
+<ul id="books">
+	<% @books.each do |book| %>
+		<li class="draggable book" id="book_<%=book.id%>">
+			<dl>
+				<dt><%= link_to book.title, catalog_path(:id => book.id) %></dt>
+				<% for author in book.authors %>
+					<dd><%= author.last_name %>, <%= author.first_name %></dd>
+				<% end %>
+				<dd>
+					<strong>
+						<%= add_book_link "+", book %>
+					</strong>
+				</dd>
+				<dd><%= pluralize(book.page_count, "page") %></dd>
+				<dd>Price: Rs.<%= sprintf("%0.2f", book.price) %></dd>
+				<dd><small>Publisher: <%= book.publisher.name %></small></dd>
+			</dl>
+		</li>
+	<% end %>
+</ul>
+

@@ -1,5 +1,13 @@
 BookStore::Application.routes.draw do
 
+  get "catalogs/latest"
+  match 'catalogs/feed' => 'catalogs#feed', :as => :feed, :defaults => { :format => :atom }
+  resources :catalogs, :only => [:index, :show]
+
+
+  get "catalogs/search"
+
+
   scope :module => 'admin' do 
     resources :books 
   end
@@ -12,7 +20,9 @@ BookStore::Application.routes.draw do
     resources :authors
   end
   get 'about/index'
-
+  match 'carts/add/:id' => 'carts#add', :as => :cart_add
+  match 'carts/remove/:id' => 'carts#remove', :as => :cart_remove
+  match 'carts/clear' => 'carts#clear', :as => :cart_clear
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -63,6 +73,7 @@ BookStore::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
+  root :to => 'catalogs#index'
 
   # See how all your routes lay out with "rake routes"
 

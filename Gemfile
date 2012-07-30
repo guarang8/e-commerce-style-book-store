@@ -8,6 +8,8 @@ gem 'rails', '3.2.6'
 gem 'mysql2'
 gem 'carrierwave'
 gem 'rmagick'
+gem 'tire'
+gem 'will_paginate'
 
 
 # Gems used only for assets and not required
@@ -31,6 +33,7 @@ group :test, :development do
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
